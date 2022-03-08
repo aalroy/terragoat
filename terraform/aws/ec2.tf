@@ -36,6 +36,7 @@ resource "aws_ebs_volume" "web_host_storage" {
   availability_zone = "${var.region}a"
   #encrypted         = false  # Setting this causes the volume to be recreated on apply 
   size = 1
+  
   tags = merge({
     Name = "${local.resource_prefix.value}-ebs"
     }, {
@@ -71,6 +72,7 @@ resource "aws_ebs_snapshot" "example_snapshot" {
 resource "aws_volume_attachment" "ebs_att" {
   device_name = "/dev/sdh"
   volume_id   = "${aws_ebs_volume.web_host_storage.id}"
+  
   instance_id = "${aws_instance.web_host.id}"
 }
 
