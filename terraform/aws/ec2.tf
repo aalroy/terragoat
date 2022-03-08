@@ -36,6 +36,7 @@ resource "aws_ebs_volume" "web_host_storage" {
   availability_zone = "${var.region}a"
   #encrypted         = false  # Setting this causes the volume to be recreated on apply 
   size = 1
+  
   tags = merge({
     Name = "${local.resource_prefix.value}-ebs"
     }, {
@@ -54,6 +55,7 @@ resource "aws_ebs_snapshot" "example_snapshot" {
   # ebs snapshot without encryption
   volume_id   = "${aws_ebs_volume.web_host_storage.id}"
   description = "${local.resource_prefix.value}-ebs-snapshot"
+  
   tags = merge({
     Name = "${local.resource_prefix.value}-ebs-snapshot"
     }, {
