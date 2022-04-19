@@ -54,6 +54,7 @@ resource "aws_ebs_snapshot" "example_snapshot" {
   # ebs snapshot without encryption
   volume_id   = "${aws_ebs_volume.web_host_storage.id}"
   description = "${local.resource_prefix.value}-ebs-snapshot"
+  
   tags = merge({
     Name = "${local.resource_prefix.value}-ebs-snapshot"
     }, {
@@ -78,6 +79,7 @@ resource "aws_security_group" "web-node" {
   # security group is open to the world in SSH port
   name        = "${local.resource_prefix.value}-sg"
   description = "${local.resource_prefix.value} Security Group"
+  
   vpc_id      = aws_vpc.web_vpc.id
 
   ingress {
